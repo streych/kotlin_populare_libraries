@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_liner_mar_top">15dp</dimen>
+    <dimen name="header_text_size">35sp</dimen>
+    <dimen name="margin_heaer">35sp</dimen>
+</resources>
