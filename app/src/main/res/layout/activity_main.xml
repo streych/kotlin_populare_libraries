@@ -1,62 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/activity_liner_mar_top"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/margin_heaer"
-        android:text="@string/header_text"
-        android:textSize="@dimen/header_text_size" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/tap_me_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/tap_me" />
-
-    <TextView
-        android:id="@+id/text_me_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/_0" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/tap_me_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/tap_me" />
-
-    <TextView
-        android:id="@+id/text_me_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/_0" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/tap_me_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/tap_me" />
-
-    <TextView
-        android:id="@+id/text_me_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/_0" />
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

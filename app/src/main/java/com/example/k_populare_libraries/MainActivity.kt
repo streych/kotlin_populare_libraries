@@ -1,52 +1,47 @@
 package com.example.k_populare_libraries
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.k_populare_libraries.app.App
 import com.example.k_populare_libraries.databinding.ActivityMainBinding
-import com.example.k_populare_libraries.presenter.CounterType
 import com.example.k_populare_libraries.presenter.MainPresenter
-import com.example.k_populare_libraries.view.MainView
+import com.example.k_populare_libraries.screens.AndroidScreens
+import com.example.k_populare_libraries.screens.BackButtonListenerI
+import com.example.k_populare_libraries.view.MainViewI
+import com.github.terrakok.cicerone.androidx.AppNavigator
+import moxy.MvpAppCompatActivity
+import moxy.ktx.moxyPresenter
 
-class MainActivity : AppCompatActivity(), MainView {
 
-    private lateinit var binding: ActivityMainBinding
-    private var presenter = MainPresenter(this)
+class MainActivity : MvpAppCompatActivity(), MainViewI {
+
+    val navigator = AppNavigator(this, R.id.container)
+
+    private val presenter by moxyPresenter { MainPresenter(App.instance.router, AndroidScreens()) }
+    private var binding: ActivityMainBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        listenerTap()
+        setContentView(binding?.root)
     }
 
-    //отображение для экрана
-    override fun setButtonText1(text: String) {
-        binding.textMe1.text = text
+
+    override fun onResumeFragments() {
+        super.onResumeFragments()
+        App.instance.navigatorHolder.setNavigator(navigator)
     }
 
-    override fun setButtonText2(text: String) {
-        binding.textMe2.text = text
+    override fun onPause() {
+        super.onPause()
+        App.instance.navigatorHolder.removeNavigator()
     }
 
-    override fun setButtonText3(text: String) {
-        binding.textMe3.text = text
-    }
-
-    fun listenerTap() {
-
-        //обработка нажатий
-        binding.apply {
-            tapMe1.setOnClickListener {
-                presenter.counterClick(CounterType.TAPME1)
-            }
-            tapMe2.setOnClickListener {
-                presenter.counterClick(CounterType.TAPME2)
-            }
-            tapMe3.setOnClickListener {
-                presenter.counterClick(CounterType.TAPME3)
+    override fun onBackPressed() {
+        supportFragmentManager.fragments.forEach {
+            if(it is BackButtonListenerI && it.backPressed()){
+                return
             }
         }
+        presenter.backClicked()
     }
-
-
 }

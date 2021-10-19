@@ -1,30 +1,18 @@
 package com.example.k_populare_libraries.presenter
 
-import com.example.k_populare_libraries.model.CountersModel
-import com.example.k_populare_libraries.view.MainView
+import com.example.k_populare_libraries.view.MainViewI
+import com.example.k_populare_libraries.view.ScreensI
+import com.github.terrakok.cicerone.Router
+import moxy.MvpPresenter
 
-class MainPresenter(private val view: MainView) {
+class MainPresenter(val router: Router, val screens: ScreensI) : MvpPresenter<MainViewI>() {
 
-    private val model = CountersModel()
-
-    fun counterClick(type: CounterType) {
-        //Логика что делать по нажатю кнопки
-        val nextValue = when (type) {
-            CounterType.TAPME1 -> model.next(0)
-            CounterType.TAPME2 -> model.next(1)
-            CounterType.TAPME3 -> model.next(2)
-        }
-
-        view.apply {
-            setButtonText1(nextValue.toString())
-            setButtonText2(nextValue.toString())
-            setButtonText3(nextValue.toString())
-        }
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        router.replaceScreen(screens.users())
     }
-}
 
-enum class CounterType {
-    TAPME1,
-    TAPME2,
-    TAPME3
+    fun backClicked() {
+        router.exit()
+    }
 }
