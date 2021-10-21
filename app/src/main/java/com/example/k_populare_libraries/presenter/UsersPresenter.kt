@@ -24,7 +24,7 @@ class UsersPresenter(
         userListPresenter.itemClickListener = { itemView ->
 
             //Log.d("TAG", userRepo.getUsers().get(itemView.pos).login)
-            router.navigateTo(screensI.user())
+            router.navigateTo(screensI.user(userListPresenter.users[itemView.pos]), true)
         }
 
     }
