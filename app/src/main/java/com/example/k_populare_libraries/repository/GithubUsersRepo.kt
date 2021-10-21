@@ -14,5 +14,4 @@ class GithubUsersRepo {
     fun getUsers() : List<GithubUser> {
         return repositories
     }
-
 }
