@@ -4,8 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Robo/AndroidStudioProjects/K_Populare_libraries/app/src/main/res/layout/activity_main.xml" value="0.3645833333333333" />
+        <entry key="..\:/Users/Robo/AndroidStudioProjects/K_Populare_libraries/app/src/main/res/layout/fragment_user.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/Robo/AndroidStudioProjects/K_Populare_libraries/app/src/main/res/layout/fragment_users.xml" value="0.18617021276595744" />
+        <entry key="..\:/Users/Robo/AndroidStudioProjects/K_Populare_libraries/app/src/main/res/layout/item_recyclerview.xml" value="0.5" />
+        <entry key="..\:/Users/Robo/AndroidStudioProjects/K_Populare_libraries/app/src/main/res/layout/recyclerview.xml" value="0.5" />
+        <entry key="..\:/Users/Robo/AndroidStudioProjects/K_Populare_libraries/app/src/main/res/layout/user.xml" value="0.1" />
       </map>
     </option>
+  </component>
+  <component name="EntryPointsManager">
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="kotlinx.parcelize.Parcelize" />
+    </list>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
