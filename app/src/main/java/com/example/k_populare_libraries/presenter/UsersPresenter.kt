@@ -1,9 +1,14 @@
 package com.example.k_populare_libraries.presenter
 
+import com.example.k_populare_libraries.data.GithubUser
 import com.example.k_populare_libraries.repository.GithubUsersRepo
 import com.example.k_populare_libraries.view.ScreensI
 import com.example.k_populare_libraries.view.UsersViewI
 import com.github.terrakok.cicerone.Router
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.subjects.PublishSubject
 import moxy.MvpPresenter
 
 
@@ -22,16 +27,19 @@ class UsersPresenter(
         loaData()
 
         userListPresenter.itemClickListener = { itemView ->
-
-            //Log.d("TAG", userRepo.getUsers().get(itemView.pos).login)
             router.navigateTo(screensI.user(userListPresenter.users[itemView.pos]), true)
         }
 
+
     }
 
+
     private fun loaData() {
-        val users = userRepo.getUsers()
-        userListPresenter.users.addAll(users)
+
+        userRepo.getUsers().subscribe {
+            userListPresenter.users.addAll(it)
+        }
+
         viewState.updateList()
     }
 
@@ -41,3 +49,6 @@ class UsersPresenter(
     }
 
 }
+
+
+
