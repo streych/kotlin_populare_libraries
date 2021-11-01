@@ -42,5 +42,13 @@ class UserFragment() : MvpAppCompatFragment(), UserViewI {
         binding = null
     }
 
+    override fun setLogin(text: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun loadAvatar(url: String) {
+        TODO("Not yet implemented")
+    }
+
 
 }

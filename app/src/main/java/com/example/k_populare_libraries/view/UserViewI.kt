@@ -5,4 +5,7 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface UserViewI : MvpView
+interface UserViewI : MvpView {
+    fun setLogin(text: String)
+    fun loadAvatar(url: String)
+}

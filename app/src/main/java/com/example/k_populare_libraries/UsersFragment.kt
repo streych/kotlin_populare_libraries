@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.k_populare_libraries.adapter.UsersRVAdapter
 import com.example.k_populare_libraries.app.App
+import com.example.k_populare_libraries.data.ApiHolder
 import com.example.k_populare_libraries.databinding.FragmentUsersBinding
 import com.example.k_populare_libraries.presenter.UsersPresenter
-import com.example.k_populare_libraries.repository.GithubUsersRepo
+import com.example.k_populare_libraries.repository.RetrofitGithubUsersRepo
 import com.example.k_populare_libraries.screens.AndroidScreens
 import com.example.k_populare_libraries.screens.BackButtonListenerI
 import com.example.k_populare_libraries.view.UsersViewI
-import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -24,7 +25,11 @@ class UsersFragment : MvpAppCompatFragment(), UsersViewI, BackButtonListenerI {
     }
 
     val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(GithubUsersRepo(), App.instance.router, AndroidScreens())
+        UsersPresenter(
+            AndroidSchedulers.mainThread(),
+            RetrofitGithubUsersRepo(ApiHolder.api),
+            App.instance.router, AndroidScreens()
+        )
     }
 
     var adapter: UsersRVAdapter? = null
@@ -45,7 +50,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersViewI, BackButtonListenerI {
 
     override fun init() {
         binding?.rvUsers?.layoutManager = LinearLayoutManager(context)
-        adapter = UsersRVAdapter(presenter.userListPresenter)
+        adapter = UsersRVAdapter(presenter.usersListPresenter)
         binding?.rvUsers?.adapter = adapter
     }
 
