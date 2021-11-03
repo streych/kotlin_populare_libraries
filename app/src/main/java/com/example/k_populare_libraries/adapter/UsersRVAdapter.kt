@@ -3,16 +3,19 @@ package com.example.k_populare_libraries.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.k_populare_libraries.data.GithubUser
 import com.example.k_populare_libraries.databinding.ItemRecyclerviewBinding
+import com.example.k_populare_libraries.model.GlideImageLoader
 import com.example.k_populare_libraries.repository.GithubUsersRepo
+import com.example.k_populare_libraries.view.IImageLoader
 import com.example.k_populare_libraries.view.UserItemViewI
 import com.example.k_populare_libraries.view.UserListPresenterI
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.PublishSubject
 
-class UsersRVAdapter(val presenter: UserListPresenterI) :
+class UsersRVAdapter(val presenter: UserListPresenterI, val imageLoader: IImageLoader<ImageView>) :
     RecyclerView.Adapter<UsersRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -43,6 +46,10 @@ class UsersRVAdapter(val presenter: UserListPresenterI) :
         override var pos = -1
         override fun setLogin(text: String) = with(vb) {
             tvLogin.text = text
+        }
+
+        override fun loadAvatar(url: String) {
+            imageLoader.loadInto(url, vb.ivAvatar)
         }
     }
 

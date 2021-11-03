@@ -9,6 +9,7 @@ import com.example.k_populare_libraries.adapter.UsersRVAdapter
 import com.example.k_populare_libraries.app.App
 import com.example.k_populare_libraries.data.ApiHolder
 import com.example.k_populare_libraries.databinding.FragmentUsersBinding
+import com.example.k_populare_libraries.model.GlideImageLoader
 import com.example.k_populare_libraries.presenter.UsersPresenter
 import com.example.k_populare_libraries.repository.RetrofitGithubUsersRepo
 import com.example.k_populare_libraries.screens.AndroidScreens
@@ -50,7 +51,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersViewI, BackButtonListenerI {
 
     override fun init() {
         binding?.rvUsers?.layoutManager = LinearLayoutManager(context)
-        adapter = UsersRVAdapter(presenter.usersListPresenter)
+        adapter = UsersRVAdapter(presenter.usersListPresenter, GlideImageLoader())
         binding?.rvUsers?.adapter = adapter
     }
 

@@ -16,8 +16,5 @@ class AndroidScreens : ScreensI {
                 putParcelable(UserFragment.BUNDLE_EXTRA, user)
             })
         }
-
     }
-
-
 }

@@ -27,6 +27,7 @@ class UsersPresenter(
         override fun bindView(view: UserItemViewI) {
             val user = users[view.pos]
             user.login?.let { view.setLogin(it) }
+            user.avatarUrl?.let { view.loadAvatar(it) }
         }
 
         override fun getCount() = users.size
@@ -34,17 +35,12 @@ class UsersPresenter(
     }
 
     val usersListPresenter = UsersListPresenter()
-    val userListPresenter = UserListPresenter()
+
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
         loaData()
-
-        userListPresenter.itemClickListener = { itemView ->
-             router.navigateTo(screensI.user(userListPresenter.users[itemView.pos]), true)
-         }
-
 
         usersListPresenter.itemClickListener = { itemView ->
             val user = usersListPresenter.users[itemView.pos]
