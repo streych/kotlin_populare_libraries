@@ -13,7 +13,9 @@ import com.example.k_populare_libraries.data.ApiHolder
 import com.example.k_populare_libraries.data.GithubUser
 import com.example.k_populare_libraries.databinding.FragmentUserBinding
 import com.example.k_populare_libraries.presenter.UserPresenter
+import com.example.k_populare_libraries.presenter.UsersPresenter
 import com.example.k_populare_libraries.repository.RetrofitGitUserInfo
+import com.example.k_populare_libraries.repository.RetrofitGithubUsersRepo
 import com.example.k_populare_libraries.screens.AndroidScreens
 import com.example.k_populare_libraries.view.UsersViewI
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -53,6 +55,7 @@ class UserFragment() : MvpAppCompatFragment(), UsersViewI {
     @SuppressLint("CheckResult")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         userBundle = arguments?.getParcelable(BUNDLE_EXTRA) ?: GithubUser()
         binding?.login?.text = userBundle.login
         binding?.ivAvatar?.let {

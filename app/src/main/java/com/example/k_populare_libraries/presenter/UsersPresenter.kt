@@ -2,10 +2,7 @@ package com.example.k_populare_libraries.presenter
 
 import com.example.k_populare_libraries.data.GithubUser
 import com.example.k_populare_libraries.repository.RetrofitGithubUsersRepo
-import com.example.k_populare_libraries.view.ScreensI
-import com.example.k_populare_libraries.view.UserItemViewI
-import com.example.k_populare_libraries.view.UserListPresenterI
-import com.example.k_populare_libraries.view.UsersViewI
+import com.example.k_populare_libraries.view.*
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
@@ -18,16 +15,20 @@ class UsersPresenter(
     val screensI: ScreensI
 ) :
     MvpPresenter<UsersViewI>() {
-    class UsersListPresenter : UserListPresenterI {
+
+    class UsersListPresenter() : UserListPresenterI{
 
         val users = mutableListOf<GithubUser>()
 
         override var itemClickListener: ((UserItemViewI) -> Unit)? = null
 
         override fun bindView(view: UserItemViewI) {
+
             val user = users[view.pos]
-            user.login?.let { view.setLogin(it) }
+            user.login?.let {
+                view.setLogin(it) }
             user.avatarUrl?.let { view.loadAvatar(it) }
+
         }
 
         override fun getCount() = users.size
@@ -37,11 +38,11 @@ class UsersPresenter(
     val usersListPresenter = UsersListPresenter()
 
 
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
         loaData()
-
         usersListPresenter.itemClickListener = { itemView ->
             val user = usersListPresenter.users[itemView.pos]
             router.navigateTo(screensI.user(user))

@@ -2,4 +2,5 @@
 <resources>
     <string name="_0">0</string>
     <string name="header_text">MVP</string>
+    <string name="name_repository">name repository</string>
 </resources>

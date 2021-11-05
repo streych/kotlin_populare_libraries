@@ -2,19 +2,42 @@ package com.example.k_populare_libraries
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import com.example.k_populare_libraries.data.ApiHolder
+import com.example.k_populare_libraries.databinding.FragmentRepositoryInfoBinding
+import com.example.k_populare_libraries.presenter.RepositoryInfoPresenter
+import com.example.k_populare_libraries.repository.RetrofitGitRepoInfo
+import com.example.k_populare_libraries.view.UsersViewI
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import moxy.MvpAppCompatFragment
+import moxy.ktx.moxyPresenter
 
 
-class RepositoryInfoFragment : Fragment() {
+class RepositoryInfoFragment : MvpAppCompatFragment(), UsersViewI {
+
+    private var binding: FragmentRepositoryInfoBinding? = null
+
+    val presenter: RepositoryInfoPresenter by moxyPresenter {
+        RepositoryInfoPresenter(
+            AndroidSchedulers.mainThread(),
+            RetrofitGitRepoInfo(ApiHolder.api_repo_info)
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ) = FragmentRepositoryInfoBinding.inflate(inflater, container, false).also {
+        binding = it
+    }.root
 
-        return inflater.inflate(R.layout.fragment_repository_info, container, false)
+    override fun init() {
+        binding?.nameRepository?.text = presenter.userInfoListPresenter.repoInfo.toString()
+
+    }
+
+    override fun updateList() {
+        TODO("Not yet implemented")
     }
 
 }

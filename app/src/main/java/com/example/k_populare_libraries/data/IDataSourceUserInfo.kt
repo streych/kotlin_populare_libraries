@@ -7,7 +7,7 @@ import retrofit2.http.Path
 interface IDataSourceUserInfo {
     @GET("/users/{username}/{repos}")
     fun getUserInfo(
-        @Path("username") username: String = "streych",
+        @Path("username") username: String,
         @Path("repos") repos: String = "repos"
     ): Single<List<GitUserInfo>>
 }
