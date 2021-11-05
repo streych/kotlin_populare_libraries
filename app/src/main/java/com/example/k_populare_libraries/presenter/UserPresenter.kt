@@ -2,10 +2,8 @@ package com.example.k_populare_libraries.presenter
 
 import com.example.k_populare_libraries.data.GitUserInfo
 import com.example.k_populare_libraries.repository.RetrofitGitUserInfo
-import com.example.k_populare_libraries.view.UserInfoItemViewI
-import com.example.k_populare_libraries.view.UserInfoListPresenterI
-import com.example.k_populare_libraries.view.UserItemViewI
-import com.example.k_populare_libraries.view.UsersViewI
+import com.example.k_populare_libraries.view.*
+import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
 
@@ -43,6 +41,13 @@ class UserPresenter( private val router: Router, val user: GithubUser
             }, {
                 println("Error: ${it.message}")
             })
+
+        userInfoListPresenter.itemClickListener = { itemView ->
+            val user = userInfoListPresenter.repositories[itemView.pos]
+            router.navigateTo(screensI.repositoryInfo(user))
+        }
+
+
     }
 
 }

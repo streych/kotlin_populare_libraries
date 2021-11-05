@@ -1,8 +1,10 @@
 package com.example.k_populare_libraries.screens
 
 import android.os.Bundle
+import com.example.k_populare_libraries.RepositoryInfoFragment
 import com.example.k_populare_libraries.UserFragment
 import com.example.k_populare_libraries.UsersFragment
+import com.example.k_populare_libraries.data.GitUserInfo
 import com.example.k_populare_libraries.data.GithubUser
 import com.example.k_populare_libraries.view.ScreensI
 import com.github.terrakok.cicerone.Screen
@@ -17,4 +19,11 @@ class AndroidScreens : ScreensI {
             })
         }
     }
+
+    override fun repositoryInfo(rInfo: GitUserInfo): Screen {
+        return FragmentScreen{
+            RepositoryInfoFragment()
+        }
+    }
+
 }
