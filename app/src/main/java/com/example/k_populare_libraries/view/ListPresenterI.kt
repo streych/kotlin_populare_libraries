@@ -7,3 +7,5 @@ interface ListPresenterI<V: ItemViewI> {
 
 }
 interface UserListPresenterI : ListPresenterI<UserItemViewI>
+
+interface UserInfoListPresenterI : ListPresenterI<UserInfoItemViewI>

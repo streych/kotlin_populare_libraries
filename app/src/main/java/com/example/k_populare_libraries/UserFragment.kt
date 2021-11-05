@@ -1,21 +1,24 @@
 package com.example.k_populare_libraries
 
 import android.annotation.SuppressLint
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.net.toUri
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.k_populare_libraries.adapter.UserInfoRVAdapter
+import com.example.k_populare_libraries.data.ApiHolder
 import com.example.k_populare_libraries.data.GithubUser
 import com.example.k_populare_libraries.databinding.FragmentUserBinding
-import com.example.k_populare_libraries.model.GlideImageLoader
+import com.example.k_populare_libraries.presenter.UserPresenter
+import com.example.k_populare_libraries.repository.RetrofitGitUserInfo
+import com.example.k_populare_libraries.view.UsersViewI
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
-import java.net.URI
+import moxy.ktx.moxyPresenter
 
-class UserFragment() : MvpAppCompatFragment() {
+class UserFragment() : MvpAppCompatFragment(), UsersViewI {
 
     companion object {
         const val BUNDLE_EXTRA = "user"
@@ -25,6 +28,13 @@ class UserFragment() : MvpAppCompatFragment() {
             fragment.arguments = bundle
             return fragment
         }
+    }
+
+    val presenter: UserPresenter by moxyPresenter {
+        UserPresenter(
+            AndroidSchedulers.mainThread(),
+            RetrofitGitUserInfo(ApiHolder.api_user_info)
+        )
     }
 
     private var binding: FragmentUserBinding? = null
@@ -47,13 +57,22 @@ class UserFragment() : MvpAppCompatFragment() {
                 .load(userBundle.avatarUrl)
                 .into(it)
         }
-
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    override fun init() {
+        binding?.rvUserRepos?.layoutManager = LinearLayoutManager(context)
+        adapterInfo = UserInfoRVAdapter(presenter.userInfoListPresenter)
+        binding?.rvUserRepos?.adapter = adapterInfo
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    override fun updateList() {
+        adapterInfo?.notifyDataSetChanged()
     }
 
 }
