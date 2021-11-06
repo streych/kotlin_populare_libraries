@@ -6,5 +6,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class GitUserInfo(
-    @Expose val name: String? = null
+    @Expose val name: String? = null,
+    @Expose val forks: Int? = null
 ): Parcelable

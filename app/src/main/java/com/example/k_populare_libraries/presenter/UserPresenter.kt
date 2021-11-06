@@ -39,7 +39,7 @@ class UserPresenter( private val router: Router, val user: GithubUser
         super.onFirstViewAttach()
         viewState.init()
 
-        login?.let {
+        login.let {
             userRepo.getUserInfo(it)
                 .observeOn(uiScheduler)
                 .subscribe({ repo ->

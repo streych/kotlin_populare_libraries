@@ -22,7 +22,9 @@ class AndroidScreens : ScreensI {
 
     override fun repositoryInfo(rInfo: GitUserInfo): Screen {
         return FragmentScreen{
-            RepositoryInfoFragment()
+            RepositoryInfoFragment.newInstance(Bundle().apply {
+                putParcelable(RepositoryInfoFragment.BUNDLE_EXTRA_FORKS, rInfo)
+            })
         }
     }
 
