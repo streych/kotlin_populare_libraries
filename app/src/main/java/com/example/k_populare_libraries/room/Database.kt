@@ -3,7 +3,6 @@ package com.example.k_populare_libraries.room
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.k_populare_libraries.app.App.Companion.instance
 import com.example.k_populare_libraries.room.dao.RepositoryDao
 import com.example.k_populare_libraries.room.dao.UserDao
 
